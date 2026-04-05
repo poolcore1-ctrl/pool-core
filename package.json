@@ -1,0 +1,18 @@
+{
+  "name": "drive-pool",
+  "version": "1.0.0",
+  "description": "Unified Google Drive storage pool — Cloudflare Workers",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply drive-pool-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply drive-pool-db --remote",
+    "db:create": "wrangler d1 create drive-pool-db",
+    "queue:create": "wrangler queues create drive-pool-jobs",
+    "setup": "npm run db:create && npm run queue:create && npm run db:migrate:remote"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

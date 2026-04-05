@@ -1,0 +1,7 @@
+# .dev.vars — local development secrets (never commit this file)
+# Copy this to .dev.vars and fill in your values for local `wrangler dev`
+
+MASTER_SECRET=your-random-32-char-secret-here-xxx
+GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+JWT_SECRET=another-random-secret-for-jwt-tokens

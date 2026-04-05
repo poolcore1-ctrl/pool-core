@@ -1,0 +1,40 @@
+name = "drive-pool"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "drive-pool-db"
+database_id = "ddef938c-0687-419a-bcdc-c658d46332e8"
+
+
+[[queues.producers]]
+binding = "QUEUE"
+queue = "drive-pool-jobs"
+
+[[queues.consumers]]
+queue = "drive-pool-jobs"
+max_batch_size = 10
+max_batch_timeout = 5
+
+[durable_objects]
+bindings = [
+  { name = "ACCOUNT_STATE", class_name = "AccountState" }
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["AccountState"]
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[vars]
+ENVIRONMENT = "production"
+
+# Set these via: wrangler secret put SECRET_NAME
+# MASTER_SECRET      - AES-256 encryption key for OAuth tokens
+# GOOGLE_CLIENT_ID   - From Google Cloud Console
+# GOOGLE_CLIENT_SECRET - From Google Cloud Console
+# JWT_SECRET         - For dashboard session tokens
